@@ -1,0 +1,31 @@
+.message {
+  display: block;
+  margin: 10px;
+  padding: 5px 10px;
+  border-radius: 10px;
+  max-width: 60%;
+}
+
+.message.self {
+  margin-left: auto;
+  background-color: #dcf8c6;
+}
+
+.message.peer {
+  margin-right: auto;
+  background-color: #dce7eb;
+}
+
+.chatContainer {
+  padding-top: 110px;
+}
+
+.sasContainer {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  background: #f0f0f0;
+  padding: 10px;
+  text-align: center;
+  z-index: 10;
+}
