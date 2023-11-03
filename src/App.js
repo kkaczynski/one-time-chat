@@ -1,25 +1,44 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import HostRoom from "./HostRoom";
+import JoinRoom from "./JoinRoom";
+import Chat from "./Chat";
 
-function App() {
+const App = () => {
+  const [connection, setConnection] = useState(null);
+  const [peer, setPeer] = useState(null);
+  const [aesKey, setAesKey] = useState(null);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      {connection ? (
+        <Chat connection={connection} aesKey={aesKey} peer={peer} />
+      ) : (
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <HostRoom
+                setConnection={setConnection}
+                setPeer={setPeer}
+                setAesKey={setAesKey}
+              />
+            }
+          />
+          <Route
+            path="/join"
+            element={
+              <JoinRoom
+                setConnection={setConnection}
+                setPeer={setPeer}
+                setAesKey={setAesKey}
+              />
+            }
+          />
+        </Routes>
+      )}
+    </Router>
   );
-}
+};
 
 export default App;
