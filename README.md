@@ -1,7 +1,6 @@
+# One Time Chat
 
-# Secure Chat Application
-
-This project is a secure chat application built with React and PeerJS. It utilizes WebRTC for peer-to-peer communication and ECDH for key exchange to establish a secure channel.
+This project is a secure chat application built with React, WebCrypto API and PeerJS. It utilizes WebRTC for peer-to-peer communication and ECDH for key exchange to establish a secure channel.
 
 ## Features
 

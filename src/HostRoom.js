@@ -3,7 +3,8 @@ import Peer from "peerjs";
 import { Navigate } from "react-router-dom";
 import { generateECDHKeys, deriveSharedSecret } from "./cryptoUtils";
 
-const joinUrlPrefix = process.env.REACT_APP_JOIN_PREFIX || "http://localhost:3000/join?peerId="
+const joinUrlPrefix =
+  process.env.REACT_APP_JOIN_PREFIX || "http://localhost:3000/join?peerId=";
 
 const HostRoom = ({ setConnection, setPeer, setAesKey }) => {
   const [peerId, setPeerId] = useState("");
@@ -11,8 +12,22 @@ const HostRoom = ({ setConnection, setPeer, setAesKey }) => {
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
-    generateECDHKeys().then((keys) => {
-      const newPeer = new Peer();
+    generateECDHKeys().then(async (keys) => {
+      const exportedPublicKey = await window.crypto.subtle.exportKey(
+        "jwk",
+        keys.publicKey
+      );
+      const jsonPublicKey = JSON.stringify(exportedPublicKey);
+      const buffer = new TextEncoder().encode(jsonPublicKey);
+      const hashBuffer = await window.crypto.subtle.digest(
+        "SHA-256",
+        buffer
+      );
+      const hashArray = Array.from(new Uint8Array(hashBuffer)); // convert buffer to byte array
+      const hashHex = hashArray
+        .map((b) => b.toString(16).padStart(2, "0"))
+        .join("");
+      const newPeer = new Peer(hashHex);
       setPeer(newPeer);
 
       newPeer.on("open", (id) => {
@@ -74,12 +89,8 @@ const HostRoom = ({ setConnection, setPeer, setAesKey }) => {
 
   return (
     <div>
-      <h2>Your unique chat link:</h2>
-      {peerId && (
-        <a href={joinUrlPrefix+peerId}>
-          {joinUrlPrefix+peerId}
-        </a>
-      )}
+      <h2>Share your unique chat link to start chat:</h2>
+      {peerId && <a href={joinUrlPrefix + peerId}>{joinUrlPrefix + peerId}</a>}
     </div>
   );
 };
