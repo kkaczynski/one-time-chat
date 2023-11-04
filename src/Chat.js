@@ -35,9 +35,15 @@ const Chat = ({ connection, aesKey, peer }) => {
     // Set up the event listener
     connection.on("data", handleData);
 
+    connection.on("close", () => {
+      alert("Connection with peer closed");
+      setSas("");
+    });
+
     // Return a cleanup function that removes the event listener
     return () => {
       connection.off("data", handleData);
+      connection.off("close");
     };
   }, [aesKey, connection]);
 
@@ -52,10 +58,18 @@ const Chat = ({ connection, aesKey, peer }) => {
     <div className="chatContainer">
       <div className="sasContainer">
         <div>
-          <p>Please confirm the following code matches on both devices:</p>
-          <p>
-            <strong>{sas}</strong>
-          </p>
+          {sas ? (
+            <>
+              <p>Please confirm the following code matches on both devices:</p>
+              <p>
+                <strong>{sas}</strong>
+              </p>{" "}
+            </>
+          ) : (
+            <>
+              <p>No active connection</p>
+            </>
+          )}
         </div>
       </div>
       <div>
@@ -67,8 +81,14 @@ const Chat = ({ connection, aesKey, peer }) => {
           </p>
         ))}
       </div>
-      <input value={input} onChange={(e) => setInput(e.target.value)} />
-      <button onClick={sendMessage}>Send</button>
+      {sas ? (
+        <>
+          <input value={input} onChange={(e) => setInput(e.target.value)} />
+          <button onClick={sendMessage}>Send</button>
+        </>
+      ) : (
+        <></>
+      )}
     </div>
   );
 };
