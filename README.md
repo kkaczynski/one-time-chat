@@ -1,70 +1,43 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Secure Chat Application
 
-## Available Scripts
+This project is a secure chat application built with React and PeerJS. It utilizes WebRTC for peer-to-peer communication and ECDH for key exchange to establish a secure channel.
 
-In the project directory, you can run:
+## Features
 
-### `npm start`
+- Peer-to-peer communication using WebRTC.
+- Secure key exchange with Elliptic-curve Diffie–Hellman (ECDH).
+- Encryption and decryption of messages using AES-GCM.
+- Unique chat room links for initiating a chat.
+- Short Authentication String (SAS) for confirming the identity of participants.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Installation
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+To run this project, you will need Node.js and npm installed on your machine.
 
-### `npm test`
+1. Clone the repository to your local machine.
+2. Navigate to the cloned directory and run `npm install` to install dependencies.
+3. Start the development server with `npm start`.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Usage
 
-### `npm run build`
+To host a chat room:
+1. Navigate to the root path `/` to create a new room.
+2. Share the unique chat link with another party.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+To join a chat room:
+1. Receive a unique chat link from the host.
+2. Navigate to the provided link to join the chat.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Once connected, both parties should confirm the SAS displayed at the top of the chat interface to ensure the security of the communication channel.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Contributing
 
-### `npm run eject`
+Contributions to this project are welcome. Please fork the repository and submit a pull request for any enhancements or bug fixes.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## License
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+This project is open-sourced under the MIT license. See the LICENSE file for more details.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Hosting
+This project is also hosted on Cloudflare at the following URL: [one-time-chat.pages.dev](https://one-time-chat.pages.dev). You can use this hosted version as well.
